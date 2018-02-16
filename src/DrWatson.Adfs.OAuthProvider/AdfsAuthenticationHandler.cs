@@ -62,7 +62,7 @@ namespace DrWatson.Adfs.OAuthProvider
                     IssuerSigningKey = new X509SecurityKey(adfs.GetSigningCertificate()),
                     ValidateAudience = true,
                     ValidateIssuer = true,
-                    ValidAudience = Options.AdfsAudience,
+                    ValidAudience = Options.Audience,
                     ValidIssuer = adfs.Identity,
                     RequireSignedTokens = true
                 };

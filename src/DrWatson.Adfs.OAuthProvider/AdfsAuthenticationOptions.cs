@@ -6,7 +6,7 @@ namespace DrWatson.Adfs.OAuthProvider
 {
     public class AdfsAuthenticationOptions : OAuthOptions
     {
-        private string adfsUrl;
+        private string authority;
 
         public AdfsAuthenticationOptions()
         {
@@ -17,21 +17,21 @@ namespace DrWatson.Adfs.OAuthProvider
             {
                 OnRedirectToAuthorizationEndpoint = context =>
                 {
-                    context.Response.Redirect($"{context.RedirectUri}&resource={AdfsAudience}");
+                    context.Response.Redirect($"{context.RedirectUri}&resource={Audience}");
                     return Task.FromResult(0);
                 }
             };
         }
 
-        public string AdfsAudience { get; set; }
-        public string AdfsUrl
+        public string Audience { get; set; }
+        public string Authority
         {
-            get => adfsUrl;
+            get => authority;
             set
             {
-                adfsUrl = value;
-                AuthorizationEndpoint = CombineUrl(adfsUrl, AdfsAuthenticationDefaults.AuthorizationEndpoint);
-                TokenEndpoint = adfsUrl + AdfsAuthenticationDefaults.TokenEndpoint;
+                authority = value;
+                AuthorizationEndpoint = CombineUrl(authority, AdfsAuthenticationDefaults.AuthorizationEndpoint);
+                TokenEndpoint = authority + AdfsAuthenticationDefaults.TokenEndpoint;
             }
         }
 
